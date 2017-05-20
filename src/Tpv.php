@@ -119,18 +119,15 @@ class Tpv
 
     /**
      * Get Ds_Order of Notification
-     * @param $paraments Array with parameters
+     * @param $parameters Array with parameters
      * @return string
      */
-    function getOrderNotification($paraments){
+    function getOrderNotification($parameters)
+    {
         $order = '';
-        if (is_array($paraments)) {
-            foreach($paraments as $key => $value) {
-                if(strtolower($key) == 'ds_order' ){
-                    $order = $value;
-                }
-            }    
-        }
+        if (is_array($parameters) && isset($parameters['Ds_Order'])) {
+            $order = $parameters['Ds_Order'];
+        }        
         return $order;
     }
 
