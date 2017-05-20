@@ -124,10 +124,12 @@ class Tpv
      */
     function getOrderNotification($paraments){
         $order = '';
-        foreach($paraments as $key => $value) {
-            if(strtolower($key) == 'ds_order' ){
-                $order = $value;
-            }
+        if (is_array($paraments)) {
+            foreach($paraments as $key => $value) {
+                if(strtolower($key) == 'ds_order' ){
+                    $order = $value;
+                }
+            }    
         }
         return $order;
     }
