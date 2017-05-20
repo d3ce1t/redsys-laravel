@@ -521,7 +521,7 @@ class Tpv
     public function getMerchantParameters($parameters){
         $decodec = $this->decodeParameters($parameters);
         $decodec_array=$this->JsonToArray($decodec);
-        return $decodec_array;
+        return is_array($decodec_array) ? $decodec_array : [];
     }
 
 
