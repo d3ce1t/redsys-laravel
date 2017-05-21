@@ -339,13 +339,13 @@ class Tpv
 
     /**
      * Optional field for the trade to be included in the data sent by the "on-line" response to trade if this option has been chosen.
-     * @param $merchantdata
+     * @param array $merchantdata
      * @throws Exception
      */
-    public function setMerchantData($merchantdata)
+    public function setMerchantData(array $merchantdata)
     {
-        if(strlen(trim($merchantdata)) > 0){
-            $this->_setParameters['DS_MERCHANT_MERCHANTDATA'] = trim($merchantdata);
+        if (is_array($merchantdata)) {
+            $this->_setParameters['DS_MERCHANT_MERCHANTDATA'] = json_encode($merchantdata);
         }
         else{
             throw new Exception('Add merchant data');
@@ -522,6 +522,17 @@ class Tpv
         $decodec = $this->decodeParameters($parameters);
         $decodec_array=$this->JsonToArray($decodec);
         return is_array($decodec_array) ? $decodec_array : [];
+    }
+
+
+    /**
+     * Decode Ds_MerchantData from parameters, return array
+     * @param $parameters
+     * @return array with merchant data
+     */
+    public function getMerchantData($parameters) {
+        $merchantdata = $parameters['Ds_MerchantData'];
+        return json_decode(html_entity_decode(urldecode($merchantdata)), true);
     }
 
 
